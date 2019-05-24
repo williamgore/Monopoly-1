@@ -1,17 +1,76 @@
-
 package monopoly;
 
+import javax.swing.JOptionPane;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
+ * Monopoly.java -
  *
- * @author Raden Pablo and Will Gore
+ * @author William Gore & Raden Pablo
+ * @since 23-May-2019
  */
 public class Monopoly {
+
+    final static String TITLE = "Monopoly";
+    final static String imageFile = "C:\\Users\\r.pablo\\Desktop\\Monopoly.png";
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        int choice = intro();
+        checkChoice(choice);
     }
-    
+
+    /**
+     * Welcomes the player to the program
+     *
+     * @return - returns the choice of action
+     */
+    private static int intro() {
+        String[] options = {"Play Game", "Rules", "Quit"};
+        Icon picture = new ImageIcon(imageFile);
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Welcome to Monopoly!\n"
+                + "What would you like to do?",
+                TITLE,
+                0,
+                0,
+                picture,
+                options,
+                TITLE);
+        return choice;
+    }
+
+    private static void checkChoice(int choice) {
+        if (choice == 0) {
+            playGame();
+        } else if (choice == 1) {
+            showRules();
+        } else {
+            close();
+        }
+    }
+
+    private static void playGame() {
+       Players players = new Players();
+       players.Dice();
+       players.Dice2();
+        
+    }
+
+    private static void close() {
+        output("Thank you for using our program!");
+        System.exit(0);
+    }
+
+    private static void output(String text) {
+        JOptionPane.showMessageDialog(null, text);
+    }
+
+    private static void showRules() {
+        output("");
+    }
 }
