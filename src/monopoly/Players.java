@@ -1,5 +1,8 @@
 package monopoly;
 
+import javax.swing.JOptionPane;
+import static monopoly.Monopoly.TITLE;
+
 /**
  * Players.java - to create players
  *
@@ -9,21 +12,29 @@ package monopoly;
 public class Players {
 
     private int cash = 1500;
-    public int roll;
+    public int turn;
     public int people;
-
+/**
+ * 
+ */
     public void Players() {
+       
 
     }
 
+    /**
+     * To create dices
+     */
     public void Dice() {
-       int dice1 = random(1, 6);
+        // first dice
+        int dice1 = random(1, 6);
         System.out.println(dice1);
-    }
-
-    public void Dice2() {
-       int dice2 = random(1, 6);
+        int dice2 = random(1, 6);
+        // second dice
         System.out.println(dice2);
+        // add the two dice together
+        int sum = dice1 + dice2;
+        System.out.println(sum);
     }
 
     /**
@@ -42,5 +53,7 @@ public class Players {
         return answer;
 
     }
+
+   
 
 }
