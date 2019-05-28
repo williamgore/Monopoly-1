@@ -58,13 +58,19 @@ public class Monopoly {
         String choice = input("Please enter the number of players\n"
                 + "from 2 - 6:");
         int playerNumber = Integer.parseInt(choice);
-        // make an array 
-        String player[] = new String[playerNumber];
-        // loops it for how many player
-        for (int i = 0; i < player.length; i++) {
-            input("Please enter a name:");
+        if (playerNumber > 6 || playerNumber == 1) {
+            JOptionPane.showMessageDialog(null, "Can't go over the 6 players!"
+                    + " and can't have 1 player!",
+                     TITLE, JOptionPane.ERROR_MESSAGE);
+            playGame();
+        } else {
+            // make an array 
+            String player[] = new String[playerNumber];
+            // loops it for how many player
+            for (int i = 0; i < player.length; i++) {
+                input("Please enter a name:");
+            }
         }
-
     }
 
     private static void close() {
@@ -77,6 +83,8 @@ public class Monopoly {
     }
 
     private static void showRules() {
+        Players player = new Players();
+        player.Dice();
 
     }
 

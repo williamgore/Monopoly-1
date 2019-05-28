@@ -14,11 +14,12 @@ public class Players {
     private int cash = 1500;
     public int turn;
     public int people;
-/**
- * 
- */
+
+    /**
+     *
+     */
     public void Players() {
-       
+        
 
     }
 
@@ -28,13 +29,43 @@ public class Players {
     public void Dice() {
         // first dice
         int dice1 = random(1, 6);
-        System.out.println(dice1);
-        int dice2 = random(1, 6);
         // second dice
-        System.out.println(dice2);
+        int dice2 = random(1, 6);
         // add the two dice together
         int sum = dice1 + dice2;
+        // first turn
         System.out.println(sum);
+        if (dice1 == dice2) {
+            // first dice
+            int newRoll = random(1, 6);
+            // second dice
+            int newRoll2 = random(1, 6);
+            // add the two dice together
+            int sum2 = newRoll + newRoll2;
+            System.out.println(sum2);
+            // second turn
+            if (newRoll == newRoll2) {
+                // first dice
+                int newRoll3 = random(1, 6);
+                // second dice
+                int newRoll4 = random(1, 6);
+                // add the two dice together
+                int sum3 = newRoll3 + newRoll4;
+                System.out.println(sum3);
+                //third turn
+                if (newRoll3 == newRoll4) {
+                    // go to jail
+                    System.out.println("jail");
+                } else {
+                    nextTurn();
+                }
+
+            } else {
+                nextTurn();
+            }
+        } else {
+            nextTurn();
+        }
     }
 
     /**
@@ -54,6 +85,9 @@ public class Players {
 
     }
 
-   
+    private void nextTurn() {
+        turn++;
+
+    }
 
 }
