@@ -1,3 +1,4 @@
+    
 package monopoly;
 
 import javax.swing.JOptionPane;
@@ -14,6 +15,7 @@ public class Monopoly {
 
     final static String TITLE = "Monopoly";
     final static String imageFile = "C:\\Users\\r.pablo\\Desktop\\Monopoly.png";
+    static Player[] players;
 
     /**
      * @param args the command line arguments
@@ -46,6 +48,7 @@ public class Monopoly {
 
     private static void checkChoice(int choice) {
         if (choice == 0) {
+            setupGame();
             playGame();
         } else if (choice == 1) {
             showRules();
@@ -54,23 +57,24 @@ public class Monopoly {
         }
     }
 
-    private static void playGame() {
+    private static void setupGame() {
         String choice = input("Please enter the number of players\n"
-                + "from 2 - 6:");
-        int playerNumber = Integer.parseInt(choice);
-        if (playerNumber > 6 || playerNumber == 1) {
-            JOptionPane.showMessageDialog(null, "Can't go over the 6 players!"
-                    + " and can't have 1 player!",
-                     TITLE, JOptionPane.ERROR_MESSAGE);
-            playGame();
-        } else {
+                + "from 2 - 8:");
+        int playerNumber = convert(choice);
+        if(playerNumber > 8 || playerNumber < 2) {
+            error();
+            setupGame();
+        }
+        else {
             // make an array 
-            String player[] = new String[playerNumber];
+            Player[] players = new Player[playerNumber];
             // loops it for how many player
-            for (int i = 0; i < player.length; i++) {
-                input("Please enter a name:");
+            for (int i = 0; i < playerNumber; i++) {
+                String name = input("Please enter a name:");
+                players[i].name = name;
             }
         }
+
     }
 
     private static void close() {
@@ -83,8 +87,6 @@ public class Monopoly {
     }
 
     private static void showRules() {
-        Players player = new Players();
-        player.Dice();
 
     }
 
@@ -154,5 +156,15 @@ public class Monopoly {
                 TITLE,
                 3);
         return choice;
+    }
+
+    private static void error() {
+        output("Please enter a valid command");
+    }
+
+    private static void playGame() {
+        for (int i = 0; i < players.length; i++) {
+            players[i].takeTurn();
+        }
     }
 }
