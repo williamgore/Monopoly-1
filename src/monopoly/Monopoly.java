@@ -1,4 +1,3 @@
-    
 package monopoly;
 
 import javax.swing.JOptionPane;
@@ -16,6 +15,7 @@ public class Monopoly {
     final static String TITLE = "Monopoly";
     final static String imageFile = "C:\\Users\\r.pablo\\Desktop\\Monopoly.png";
     static Player[] players;
+    static Space[] spaces;
 
     /**
      * @param args the command line arguments
@@ -58,20 +58,20 @@ public class Monopoly {
     }
 
     private static void setupGame() {
+        setSpaces();
         String choice = input("Please enter the number of players\n"
                 + "from 2 - 8:");
         int playerNumber = convert(choice);
-        if(playerNumber > 8 || playerNumber < 2) {
+        if (playerNumber > 8 || playerNumber < 2) {
             error();
             setupGame();
-        }
-        else {
+        } else {
             // make an array 
-            Player[] players = new Player[playerNumber];
+            players = new Player[playerNumber];
             // loops it for how many player
             for (int i = 0; i < playerNumber; i++) {
                 String name = input("Please enter a name:");
-                players[i].name = name;
+                players[i] = new Player(name);
             }
         }
 
@@ -165,6 +165,15 @@ public class Monopoly {
     private static void playGame() {
         for (int i = 0; i < players.length; i++) {
             players[i].takeTurn();
+            System.out.println(i);
+            if (i == players.length - 1) {
+                i = -1;
+            }
         }
+    }
+
+    private static void setSpaces() {
+        spaces = new Space[40];
+        spaces[0] = new Space(-200);
     }
 }

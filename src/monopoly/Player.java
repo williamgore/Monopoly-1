@@ -11,30 +11,45 @@ import static monopoly.Monopoly.TITLE;
  */
 public class Player {
 
-    private int cash = 1500;
+    private int cash;
     public String name;
-    public int turn;
     public int people;
     private int space;
 
     /**
-     *
+     * set the player with cash and name
+     * 
      */
-    public void Players() {
+    public Player(String name) {
+        this.name =name;
+        cash = 1500;
         space = 0;
-        
+
     }
 
     /**
-     * To create dices
+     * to take turns on each player
      */
     public void takeTurn() {
+        System.out.println("turn start " + name);
         int doubles = 0;
         boolean isDouble = roll();
-        while(isDouble == true && doubles < 3) {
-            roll();
+        System.out.println(isDouble);
+        while (isDouble == true && doubles < 2) {
+            isDouble = roll();
             doubles++;
+            System.out.println("is double " + isDouble);
+            if (doubles == 2) {
+                System.out.println("Go to Jail");
+            }
         }
+
+        checkSpace();
+
+        if (cash == 0) {
+            System.out.println("you lose");
+        }
+        System.out.println("turn end");
     }
 
     /**
@@ -53,23 +68,42 @@ public class Player {
         return answer;
 
     }
-
-    private void nextTurn() {
-        turn++;
-    }
+    /**
+     * 
+     * @return if the roll was the same its true if not then false
+     */
 
     private boolean roll() {
         int dice1 = random(1, 6);
         int dice2 = random(1, 6);
         int move = dice1 + dice2;
+        System.out.println("Space " + space);
+        System.out.println("dice1 " + dice1 + "\ndice2 " + dice2);
         move(move);
-        if (dice1 == dice2){
+        if (dice1 == dice2) {
             return true;
         }
         return false;
     }
 
+    /**
+     *
+     * @param move the players
+     */
     private void move(int move) {
-        space += move;
+        for (int i = 0; i < move; i++) {
+            space++;
+            if (space == 40) {
+                space = 0;
+            }
+        }
+
+        System.out.println("space = " + space);
+    }
+
+    private void checkSpace() {
+        for (int i = 0; i < 40; i++) {
+
+        }
     }
 }
