@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 public class Monopoly {
 
     final static String TITLE = "Monopoly";
-    final static String imageFile = "C:\\Users\\r.pablo\\Desktop\\Monopoly.png";
+    final static String IMAGE_FILE = "C:\\Users\\r.pablo\\Desktop\\Monopoly.png";
     static Player[] players;
     static Space[] spaces;
 
@@ -32,7 +32,7 @@ public class Monopoly {
      */
     private static int intro() {
         String[] options = {"Play Game", "Rules", "Quit"};
-        Icon picture = new ImageIcon(imageFile);
+        Icon picture = new ImageIcon(IMAGE_FILE);
         int choice = JOptionPane.showOptionDialog(
                 null,
                 "Welcome to Monopoly!\n"
@@ -175,5 +175,7 @@ public class Monopoly {
     private static void setSpaces() {
         spaces = new Space[40];
         spaces[0] = new Space(-200);
+        spaces[1] = new Space(60, 2, "Brown", "Mediterranean");
+        spaces[2] = new Space(1);
     }
 }

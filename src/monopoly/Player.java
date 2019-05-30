@@ -12,16 +12,19 @@ import static monopoly.Monopoly.TITLE;
 public class Player {
 
     private int cash;
+    public int turns;
     public String name;
     public int people;
     private int space;
+    private boolean jailed;
 
     /**
      * set the player with cash and name
-     * 
+     *
      */
     public Player(String name) {
-        this.name =name;
+        jailed = false;
+        this.name = name;
         cash = 1500;
         space = 0;
 
@@ -32,24 +35,36 @@ public class Player {
      */
     public void takeTurn() {
         System.out.println("turn start " + name);
-        int doubles = 0;
-        boolean isDouble = roll();
-        System.out.println(isDouble);
-        while (isDouble == true && doubles < 2) {
-            isDouble = roll();
-            doubles++;
-            System.out.println("is double " + isDouble);
-            if (doubles == 2) {
-                System.out.println("Go to Jail");
+        if (jailed == false) {
+            int doubles = 0;
+            boolean isDouble = roll();
+            System.out.println(isDouble);
+            while (isDouble == true && doubles < 2) {
+                isDouble = roll();
+                doubles++;
+                System.out.println("is double " + isDouble);
+                if (doubles == 2) {
+                    System.out.println("Go to Jail");
+                    jailed = true;
+                    turns = 0;
+                }
             }
-        }
 
-        checkSpace();
+            checkSpace();
 
-        if (cash == 0) {
-            System.out.println("you lose");
+            if (cash == 0) {
+                System.out.println("you lose");
+            }
+            System.out.println("turn end");
+        } else {
+            turns++;
+            if (roll() == true || turns == 3) {
+                jailed = false;
+            } else {
+                System.out.println("Stay in jail!");
+            }
+
         }
-        System.out.println("turn end");
     }
 
     /**
@@ -68,18 +83,20 @@ public class Player {
         return answer;
 
     }
+
     /**
-     * 
+     *
      * @return if the roll was the same its true if not then false
      */
-
     private boolean roll() {
         int dice1 = random(1, 6);
         int dice2 = random(1, 6);
         int move = dice1 + dice2;
         System.out.println("Space " + space);
         System.out.println("dice1 " + dice1 + "\ndice2 " + dice2);
-        move(move);
+        if (jailed == false) {
+            move(move);
+        }
         if (dice1 == dice2) {
             return true;
         }

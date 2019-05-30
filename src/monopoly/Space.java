@@ -6,19 +6,29 @@ package monopoly;
  */
 public class Space {
 
-    private boolean isProperty;
-    private int price;
-    private int rent;
-    private boolean owned;
+    public String name;
+    public boolean isProperty;
+    public int price;
+    public int rent;
+    public boolean owned;
     private String colour;
 
     // creates non-buyable properties like GO
-    public  Space(int rent) {
+    public Space(int rent) {
+        isProperty = false;
+        this.rent = rent;
+        owned = true;
 
     }
 
     // creates buyable properties
-    public void Space(boolean isProperty, int price, int rent, String colour) {
+    public Space(int price, int rent, String colour,
+            String name) {
+        this.price = price;
+        this.rent = rent;
+        this.colour = colour;
+        this.name = name;
+        isProperty = true;
 
     }
 }
