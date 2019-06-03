@@ -13,7 +13,7 @@ public class Player {
 
     private int cash;
     public int turns;
-    public String name;
+    static String name;
     public int people;
     private int space;
     private boolean jailed;
@@ -84,6 +84,8 @@ public class Player {
 
     }
 
+    
+    
     /**
      *
      * @return if the roll was the same its true if not then false

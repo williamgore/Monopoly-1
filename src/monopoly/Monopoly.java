@@ -1,5 +1,6 @@
 package monopoly;
 
+
 import javax.swing.JOptionPane;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -72,7 +73,10 @@ public class Monopoly {
             for (int i = 0; i < playerNumber; i++) {
                 String name = input("Please enter a name:");
                 players[i] = new Player(name);
+                
             }
+          Board board = new Board();
+          
         }
 
     }
@@ -87,6 +91,7 @@ public class Monopoly {
     }
 
     private static void showRules() {
+        
 
     }
 
